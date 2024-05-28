@@ -87,7 +87,7 @@ class LinkedList {
      * @returns {ListNode | null}
      */
     at(index) {
-        if (index > this.size())
+        if (index < 0 || index >= this.size())
             throw new RangeError("Index out of list range");
 
         let current = this._head;
@@ -95,8 +95,9 @@ class LinkedList {
 
         while (current) {
             if (count === index) break;
-            count++;
+
             current = current.next;
+            count++;
         }
 
         return current;
@@ -144,8 +145,8 @@ class LinkedList {
         while (current) {
             if (current.value === value) return count;
 
-            count++;
             current = current.next;
+            count++;
         }
 
         return null;
@@ -172,13 +173,13 @@ class LinkedList {
      * @param {any} value
      */
     insertAt(index, value) {
-        if (index > this.size())
+        if (index < 0 || index > this.size())
             throw new RangeError("Index out of list range");
         else if (index === 0) this.prepend(value);
         else if (index === this.size()) this.append(value);
         else {
             let current = this._head;
-            let previous;
+            let previous = null;
             let count = 0;
 
             const node = new ListNode(value);
@@ -187,11 +188,12 @@ class LinkedList {
                 if (count === index && previous) {
                     node.next = current;
                     previous.next = node;
+                    break;
                 }
 
-                count++;
                 previous = current;
                 current = current.next;
+                count++;
             }
         }
     }
@@ -202,28 +204,32 @@ class LinkedList {
     removeAt(index) {
         if (index >= this.size())
             throw new RangeError("Index out of list range");
-        else if (index + 1 === this.size()) this.pop();
-        else {
-            let current = this._head;
 
-            if (index === 0 && current) {
-                this._head = current.next;
+        let current = this._head;
+
+        if (index + 1 === this.size()) {
+            this.pop();
+            return;
+        }
+
+        if (index === 0 && current) {
+            this._head = current.next;
+            current.next = null;
+            return;
+        }
+
+        let previous;
+        let count = 0;
+
+        while (current) {
+            if (count === index && previous) {
+                previous.next = current.next;
                 current.next = null;
-            } else if (current) {
-                let previous;
-                let count = 0;
+            }
 
-                while (current) {
-                    if (count === index && previous) {
-                        previous.next = current.next;
-                        current.next = null;
-                    }
-
-                    count++;
-                    previous = current;
-                    current = current.next;
-                }
-            } else return;
+            previous = current;
+            current = current.next;
+            count++;
         }
     }
 }
