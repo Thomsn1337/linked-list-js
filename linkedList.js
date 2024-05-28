@@ -109,6 +109,24 @@ class LinkedList {
         else this._head = null;
     }
 
+    /**
+     * @param {any} value
+     * @returns {boolean}
+     */
+    contains(value) {
+        let current = this._head;
+
+        while (current) {
+            if (current.value === value) {
+                return true;
+            }
+
+            current = current.next;
+        }
+
+        return false;
+    }
+
     toString() {
         let current = this._head;
         let listString = "";
