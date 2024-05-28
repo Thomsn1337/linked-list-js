@@ -31,6 +31,20 @@ class LinkedList {
 
         current.next = node;
     }
+
+    toString() {
+        let current = this.head;
+        let listString = "";
+
+        while (current) {
+            if (current.next) listString += `(${current.value}) -> `;
+            else listString += `(${current.value})`;
+
+            current = current.next;
+        }
+
+        return listString;
+    }
 }
 
 export default LinkedList;
