@@ -44,6 +44,9 @@ class LinkedList {
         this._head = node;
     }
 
+    /**
+     * @returns {number}
+     */
     size() {
         let current = this._head;
         let count = 0;
@@ -56,10 +59,16 @@ class LinkedList {
         return count;
     }
 
+    /**
+     * @returns {ListNode | null}
+     */
     get head() {
         return this._head;
     }
 
+    /**
+     * @returns {ListNode | null}
+     */
     get tail() {
         let current = this._head;
 
@@ -72,6 +81,7 @@ class LinkedList {
 
     /**
      * @param {number} index
+     * @returns {ListNode | null}
      */
     at(index) {
         let count = 0;
