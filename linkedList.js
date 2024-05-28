@@ -10,7 +10,7 @@ class ListNode {
 
 class LinkedList {
     constructor() {
-        this.head = null;
+        this._head = null;
     }
 
     /**
@@ -19,12 +19,12 @@ class LinkedList {
     append(value) {
         const node = new ListNode(value);
 
-        if (this.head === null) {
-            this.head = node;
+        if (this._head === null) {
+            this._head = node;
             return;
         }
 
-        let current = this.head;
+        let current = this._head;
         while (current.next) {
             current = current.next;
         }
@@ -37,15 +37,15 @@ class LinkedList {
      */
     prepend(value) {
         const node = new ListNode(value);
-        const current = this.head;
+        const current = this._head;
 
         if (current) node.next = current;
 
-        this.head = node;
+        this._head = node;
     }
 
     size() {
-        let current = this.head;
+        let current = this._head;
         let count = 0;
 
         while (current) {
@@ -56,8 +56,22 @@ class LinkedList {
         return count;
     }
 
+    get head() {
+        return this._head;
+    }
+
+    get tail() {
+        let current = this._head;
+
+        while (current && current.next) {
+            current = current.next;
+        }
+
+        return current;
+    }
+
     toString() {
-        let current = this.head;
+        let current = this._head;
         let listString = "";
 
         while (current) {
