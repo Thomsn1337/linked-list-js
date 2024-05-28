@@ -84,8 +84,8 @@ class LinkedList {
      * @returns {ListNode | null}
      */
     at(index) {
-        let count = 0;
         let current = this._head;
+        let count = 0;
 
         while (current) {
             if (count === index) break;
@@ -125,6 +125,24 @@ class LinkedList {
         }
 
         return false;
+    }
+
+    /**
+     * @param {any} value
+     * @returns {number | null}
+     */
+    find(value) {
+        let current = this._head;
+        let count = 0;
+
+        while (current) {
+            if (current.value === value) return count;
+
+            count++;
+            current = current.next;
+        }
+
+        return null;
     }
 
     toString() {
