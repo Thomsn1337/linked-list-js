@@ -70,6 +70,22 @@ class LinkedList {
         return current;
     }
 
+    /**
+     * @param {number} index
+     */
+    at(index) {
+        let count = 0;
+        let current = this._head;
+
+        while (current) {
+            if (count === index) break;
+            count++;
+            current = current.next;
+        }
+
+        return current;
+    }
+
     toString() {
         let current = this._head;
         let listString = "";
