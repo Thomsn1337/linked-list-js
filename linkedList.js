@@ -10,6 +10,9 @@ class ListNode {
 
 class LinkedList {
     constructor() {
+        /**
+         * @type {ListNode | null}
+         */
         this._head = null;
     }
 
@@ -190,6 +193,37 @@ class LinkedList {
                 previous = current;
                 current = current.next;
             }
+        }
+    }
+
+    /**
+     * @param {number} index
+     */
+    removeAt(index) {
+        if (index >= this.size())
+            throw new RangeError("Index out of list range");
+        else if (index + 1 === this.size()) this.pop();
+        else {
+            let current = this._head;
+
+            if (index === 0 && current) {
+                this._head = current.next;
+                current.next = null;
+            } else if (current) {
+                let previous;
+                let count = 0;
+
+                while (current) {
+                    if (count === index && previous) {
+                        previous.next = current.next;
+                        current.next = null;
+                    }
+
+                    count++;
+                    previous = current;
+                    current = current.next;
+                }
+            } else return;
         }
     }
 }
