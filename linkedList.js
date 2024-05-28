@@ -32,6 +32,18 @@ class LinkedList {
         current.next = node;
     }
 
+    /**
+     * @param {any} value
+     */
+    prepend(value) {
+        const node = new ListNode(value);
+        const current = this.head;
+
+        if (current) node.next = current;
+
+        this.head = node;
+    }
+
     toString() {
         let current = this.head;
         let listString = "";
