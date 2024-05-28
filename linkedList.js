@@ -84,6 +84,9 @@ class LinkedList {
      * @returns {ListNode | null}
      */
     at(index) {
+        if (index > this.size())
+            throw new RangeError("Index out of list range");
+
         let current = this._head;
         let count = 0;
 
@@ -159,6 +162,35 @@ class LinkedList {
         }
 
         return listString;
+    }
+
+    /**
+     * @param {number} index
+     * @param {any} value
+     */
+    insertAt(index, value) {
+        if (index > this.size())
+            throw new RangeError("Index out of list range");
+        else if (index === 0) this.prepend(value);
+        else if (index === this.size()) this.append(value);
+        else {
+            let current = this._head;
+            let previous;
+            let count = 0;
+
+            const node = new ListNode(value);
+
+            while (current) {
+                if (count === index && previous) {
+                    node.next = current;
+                    previous.next = node;
+                }
+
+                count++;
+                previous = current;
+                current = current.next;
+            }
+        }
     }
 }
 
