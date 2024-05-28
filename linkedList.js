@@ -50,7 +50,7 @@ class LinkedList {
     /**
      * @returns {number}
      */
-    size() {
+    get size() {
         let current = this._head;
         let count = 0;
 
@@ -87,7 +87,7 @@ class LinkedList {
      * @returns {ListNode | null}
      */
     at(index) {
-        if (index < 0 || index >= this.size())
+        if (index < 0 || index >= this.size)
             throw new RangeError("Index out of list range");
 
         let current = this._head;
@@ -173,10 +173,10 @@ class LinkedList {
      * @param {any} value
      */
     insertAt(index, value) {
-        if (index < 0 || index > this.size())
+        if (index < 0 || index > this.size)
             throw new RangeError("Index out of list range");
         else if (index === 0) this.prepend(value);
-        else if (index === this.size()) this.append(value);
+        else if (index === this.size) this.append(value);
         else {
             let current = this._head;
             let previous = null;
@@ -202,12 +202,11 @@ class LinkedList {
      * @param {number} index
      */
     removeAt(index) {
-        if (index >= this.size())
-            throw new RangeError("Index out of list range");
+        if (index >= this.size) throw new RangeError("Index out of list range");
 
         let current = this._head;
 
-        if (index + 1 === this.size()) {
+        if (index + 1 === this.size) {
             this.pop();
             return;
         }
