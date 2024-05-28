@@ -86,9 +86,24 @@ class LinkedList {
         return current;
     }
 
+    pop() {
+        let current = this._head;
+        let previous;
+
+        while (current && current.next) {
+            previous = current;
+            current = current.next;
+        }
+
+        if (previous) previous.next = null;
+        else this._head = null;
+    }
+
     toString() {
         let current = this._head;
         let listString = "";
+
+        if (!current) listString = "()";
 
         while (current) {
             if (current.next) listString += `(${current.value}) -> `;
